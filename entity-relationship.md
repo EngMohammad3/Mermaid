@@ -6,86 +6,42 @@
 
 ```mermaid
 erDiagram
-    User {
-        Int id PK
-        String username
-        Int serverId FK
-    }
+Book only one--| { Author: can have Book {
+string title 
+string ISBN pk 
+string Type 
+string publisher 
+string publicationYear 
+string price 
+string stockQuantity 
+string Rating string DateAdded
+}
 
-    Server {
-        Int id PK
-        String serverName
-    }
+Book } |--| { Order: Part_of Book {
+}
 
-    Server ||--o{ User : has
-```
+Author
+Author {
+int AuthorId pk 
+string Name 
+string dateOfBirth 
+string country
+}
 
-```
-erDiagram
-    User {
-        Int id PK
-        String username
-        Int serverId FK
-    }
+Customer {
+int CustomerId pk 
+string Name
+String Email pk 
+string phone 
+string ShippingAddress 
+string DateRegistred
+}
 
-    Server {
-        Int id PK
-        String serverName
-    }
-
-    Server ||--o{ User : has
-```
-
-## Defining entities
-
-```mermaid
-erDiagram
-    User {
-        String Username PK "The user's name, a primary key"
-        Date dateCreated "When the user was created"
-        Int Server FK "The user's server, a foreign key"
-    }
-```
-
-```
-erDiagram
-    User {
-        String Username PK "The user's name, a primary key"
-        Date dateCreated "When the user was created"
-        Int Server FK "The user's server, a foreign key"
-    }
-```
-
-## Defining relationships
-
-### Numerical relationship
-
-```mermaid
-erDiagram
-    User1 |o--o| Item1 : "Zero or one - Zero or one"
-    User2 }o--o{ Item2 : "Zero or more - Zero or more"
-    User3 ||--|| Item3 : "Exactly one - Exactly one"
-    User4 }|--|{ Item4 : "One or more - One or more"
-```
-
-```
-erDiagram
-    User1 |o--o| Item1 : "Zero or one - Zero or one"
-    User2 }o--o{ Item2 : "Zero or more - Zero or more"
-    User3 ||--|| Item3 : "Exactly one - Exactly one"
-    User4 }|--|{ Item4 : "One or more - One or more"
-```
-
-### Identifying relationship
-
-```mermaid
-erDiagram
-    AppleTree ||..|| Apple : "Reliant entity"
-    Flower ||--|| Leaf : "Independent entities"
-```
-
-```
-erDiagram
-    AppleTree ||..|| Apple : "Reliant entity"
-    Flower ||--|| Leaf : "Independent entities"
-```
+Order many (1)--1 Customer: is_associated Order {
+int ORDERid pk 
+string CustomerId fk
+String ISBN fk 
+string ORDERDate 
+int Quantity 
+int subtotal
+}
